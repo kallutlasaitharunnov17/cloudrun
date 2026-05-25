@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            font-family: Inter, system-ui, sans-serif;
+            color: #0f172a;
+        }
+        .card {
+            width: min(420px, 90vw);
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+            padding: 36px;
+            text-align: center;
+        }
+        h2 {
+            margin: 0 0 18px;
+            font-size: 2rem;
+        }
+        .metric {
+            margin: 18px 0 8px;
+            font-size: 1rem;
+            color: #475569;
+        }
+        .value {
+            margin: 0;
+            font-size: 2rem;
+            color: #1d4ed8;
+        }
+        .button-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+        .button-row a {
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .button-row a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 24px rgba(59, 130, 246, 0.16);
+        }
+        .button-primary { background: #2563eb; }
+        .button-secondary { background: #475569; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Result</h2>
+        <p class="metric">Selected: {{ operation|capitalize }}</p>
+        <p class="value">{{ result }}</p>
+        <div class="button-row">
+            <a href="/home" class="button-secondary">Back</a>
+            <a href="/logout" class="button-primary">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

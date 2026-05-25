@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+            font-family: Inter, system-ui, sans-serif;
+            color: #111827;
+        }
+        .card {
+            width: min(420px, 90vw);
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+            padding: 32px;
+            text-align: center;
+        }
+        .card h2 {
+            margin: 0 0 18px;
+            font-size: 1.9rem;
+            color: #1e293b;
+        }
+        .field {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #334155;
+        }
+        .field input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .field input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.12);
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .options label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+            background: #f8fafc;
+            font-weight: 600;
+            color: #334155;
+        }
+        .options input {
+            accent-color: #2563eb;
+        }
+        .options label:hover {
+            border-color: #6366f1;
+            background: #eef2ff;
+        }
+        .button-row {
+            margin-top: 18px;
+        }
+        .button-row button {
+            width: 100%;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: #2563eb;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .button-row button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.18);
+        }
+        .hint {
+            margin-top: 16px;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Rectangle Calculator</h2>
+        <form method="POST" action="/calculate">
+            <div class="field">
+                <label for="length">Length</label>
+                <input id="length" name="length" type="number" step="any" min="0" required>
+            </div>
+            <div class="field">
+                <label for="breadth">Breadth</label>
+                <input id="breadth" name="breadth" type="number" step="any" min="0" required>
+            </div>
+            <div class="field">
+                <label>Select calculation</label>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="operation" value="area" checked>
+                        Area
+                    </label>
+                    <label>
+                        <input type="radio" name="operation" value="perimeter">
+                        Perimeter
+                    </label>
+                </div>
+            </div>
+            <div class="button-row">
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <p class="hint">Select the value you want and click Calculate to compute either the area or the perimeter.</p>
+    </div>
+</body>
+</html>
