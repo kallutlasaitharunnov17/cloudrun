@@ -8,63 +8,101 @@
         body {
             margin: 0;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 45%, #f1f5f9 100%);
             font-family: Inter, system-ui, sans-serif;
             color: #0f172a;
         }
         .card {
-            width: min(420px, 90vw);
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
-            padding: 36px;
+            width: min(520px, 94vw);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 32px;
+            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.14);
+            padding: 38px 34px;
             text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.18);
         }
         h2 {
-            margin: 0 0 18px;
-            font-size: 2rem;
+            margin: 0 0 10px;
+            font-size: 2.1rem;
+            color: #111827;
         }
         .metric {
-            margin: 18px 0 8px;
-            font-size: 1rem;
+            margin: 0 0 6px;
+            font-size: 0.98rem;
             color: #475569;
+            letter-spacing: 0.02em;
         }
         .value {
             margin: 0;
-            font-size: 2rem;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1d4ed8;
+            line-height: 1;
+        }
+        .result-grid {
+            display: grid;
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .result-card {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1e3a8a;
+            padding: 20px 22px;
+            border-radius: 20px;
+        }
+        .result-card strong {
+            display: block;
+            margin-bottom: 8px;
             color: #1d4ed8;
         }
         .button-row {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 28px;
+            gap: 14px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
         .button-row a {
-            text-decoration: none;
-            padding: 12px 22px;
-            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            padding: 14px 22px;
+            border-radius: 18px;
             font-weight: 700;
             color: #ffffff;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            text-decoration: none;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
         .button-row a:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 14px 24px rgba(59, 130, 246, 0.16);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
         }
-        .button-primary { background: #2563eb; }
+        .button-primary { background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%); }
         .button-secondary { background: #475569; }
     </style>
 </head>
 <body>
     <div class="card">
-        <h2>Result</h2>
+        <h2>Calculation Result</h2>
         <p class="metric">Selected: {{ operation|capitalize }}</p>
-        <p class="value">{{ result }}</p>
+        <div class="result-grid">
+            {% if operation == 'both' %}
+                <div class="result-card">
+                    <strong>Area</strong>
+                    <p class="value">{{ area }}</p>
+                </div>
+                <div class="result-card">
+                    <strong>Perimeter</strong>
+                    <p class="value">{{ perimeter }}</p>
+                </div>
+            {% else %}
+                <p class="value">{{ result }}</p>
+            {% endif %}
+        </div>
         <div class="button-row">
             <a href="/home" class="button-secondary">Back</a>
             <a href="/logout" class="button-primary">Logout</a>

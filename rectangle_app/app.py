@@ -59,11 +59,16 @@ def calculate():
         area = length * breadth
         perimeter = 2 * (length + breadth)
 
-        result = area if operation == "area" else perimeter
+        if operation == "both":
+            result = None
+        else:
+            result = area if operation == "area" else perimeter
 
         return render_template(
             "result.html",
             result=result,
+            area=area,
+            perimeter=perimeter,
             operation=operation
         )
 
