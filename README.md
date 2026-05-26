@@ -11,6 +11,7 @@ This repository contains two Flask applications:
 - users choose whether to calculate `area` or `perimeter`
 - results display on a styled result page
 - `logic` provides the login page and authentication flow
+- on successful login, `logic` redirects users to `rectangle_app` on port `5001`
 
 ## Run locally
 

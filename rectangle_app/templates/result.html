@@ -24,21 +24,10 @@
         }
         .topbar {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             margin-bottom: 24px;
-            gap: 16px;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(59,130,246,0.12);
-            color: #1d4ed8;
-            font-size: 0.85rem;
-            font-weight: 700;
+            gap: 12px;
         }
         .title {
             text-align: right;
@@ -124,7 +113,6 @@
 <body>
     <div class="calculator">
         <div class="topbar">
-            <span class="badge">Result Panel</span>
             <div class="title">
                 <h1>Calculation Result</h1>
                 <p class="subtitle">The rectangle calculator shows the selected output and the full breakdown.</p>

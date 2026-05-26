@@ -26,7 +26,8 @@ def login():
         if username == "admin" and password == "admin":
             if request.is_json:
                 return jsonify({"status": "success"})
-            return redirect("/home")
+            host = request.host.split(':')[0]
+            return redirect(f"http://{host}:5001/home")
 
         if request.is_json:
             return jsonify({"status": "fail"})
@@ -41,7 +42,8 @@ def login():
 # ---------------------------
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    host = request.host.split(':')[0]
+    return redirect(f"http://{host}:5001/home")
 
 
 # ---------------------------
