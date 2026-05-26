@@ -52,6 +52,7 @@ def calculate():
     try:
         l = request.form.get("length")
         b = request.form.get("breadth")
+        operation = request.form.get("operation", "both")
 
         # safe conversion
         l = float(l) if l else 0
@@ -59,11 +60,14 @@ def calculate():
 
         area = l * b
         perimeter = 2 * (l + b)
+        result = None if operation == "both" else (area if operation == "area" else perimeter)
 
         return render_template(
             "result.html",
+            result=result,
             area=area,
-            perimeter=perimeter
+            perimeter=perimeter,
+            operation=operation
         )
 
     except Exception as e:

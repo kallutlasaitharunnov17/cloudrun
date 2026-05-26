@@ -1,7 +1,181 @@
-<h2>Rectangle Input</h2>
-
-<form method="POST" action="/calculate">
-    Length: <input name="length"><br><br>
-    Breadth: <input name="breadth"><br><br>
-    <button>Calculate</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at top, #eef2ff 0%, #dbeafe 35%, #e2e8f0 100%);
+            font-family: Inter, system-ui, sans-serif;
+            color: #0f172a;
+        }
+        .card {
+            width: min(560px, 94vw);
+            background: rgba(255,255,255,0.98);
+            border-radius: 32px;
+            border: 1px solid rgba(148,163,184,0.18);
+            box-shadow: 0 28px 80px rgba(15,23,42,0.12);
+            padding: 40px 38px;
+            text-align: center;
+        }
+        .badge {
+            display: inline-flex;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(59,130,246,0.12);
+            color: #1d4ed8;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            letter-spacing: -0.04em;
+            color: #0f172a;
+        }
+        .subtitle {
+            margin: 14px auto 28px;
+            max-width: 38rem;
+            color: #475569;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        .field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .field label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #334155;
+        }
+        .field input {
+            width: 100%;
+            padding: 16px 18px;
+            border-radius: 16px;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            font-size: 1rem;
+            color: #0f172a;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .field input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 8px rgba(37,99,235,0.12);
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .options label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 62px;
+            padding: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 18px;
+            background: #f8fafc;
+            cursor: pointer;
+            font-weight: 700;
+            color: #334155;
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+        .options input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .options input:checked + span {
+            color: #1e40af;
+        }
+        .options input:checked + span::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.12));
+            z-index: -1;
+            border: 1px solid rgba(37, 99, 235, 0.25);
+        }
+        .options label:hover {
+            border-color: #6366f1;
+            background: #eef2ff;
+        }
+        .button-row {
+            margin-top: 22px;
+        }
+        .button-row button {
+            width: 100%;
+            border: none;
+            border-radius: 18px;
+            padding: 16px 0;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+        .button-row button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 32px rgba(37,99,235,0.18);
+        }
+        .hint {
+            margin-top: 18px;
+            color: #64748b;
+            font-size: 0.96rem;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="badge">Port 5000</span>
+        <h1>Rectangle Calculator</h1>
+        <p class="subtitle">Enter length and breadth, select one or both calculations, and view the result in a centered dashboard layout.</p>
+        <form method="POST" action="/calculate">
+            <div class="field">
+                <label for="length">Length</label>
+                <input id="length" name="length" type="number" step="any" min="0" required>
+            </div>
+            <div class="field">
+                <label for="breadth">Breadth</label>
+                <input id="breadth" name="breadth" type="number" step="any" min="0" required>
+            </div>
+            <div class="field">
+                <label>Select calculation</label>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="operation" value="area" checked>
+                        <span>Area</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation" value="perimeter">
+                        <span>Perimeter</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation" value="both">
+                        <span>Both</span>
+                    </label>
+                </div>
+            </div>
+            <div class="button-row">
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+        <p class="hint">The result page will display the selected calculation in a clear, centered layout.</p>
+    </div>
+</body>
+</html>

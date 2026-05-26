@@ -10,34 +10,122 @@
             min-height: 100vh;
             display: grid;
             place-items: center;
-            background: radial-gradient(circle at top, #eef2ff 0%, #dbeafe 40%, #e2e8f0 100%);
+            background: radial-gradient(circle at top left, #e0f2fe 0%, #f8fafc 45%, #e2e8f0 100%);
             font-family: Inter, system-ui, sans-serif;
             color: #0f172a;
         }
-        .card {
-            width: min(520px, 94vw);
+        .calculator {
+            width: min(540px, 96vw);
             background: rgba(255,255,255,0.98);
-            border-radius: 32px;
-            box-shadow: 0 28px 80px rgba(15, 23, 42, 0.14);
-            padding: 38px 34px;
-            text-align: center;
-            border: 1px solid rgba(148, 163, 184, 0.16);
+            border-radius: 36px;
+            border: 1px solid rgba(148,163,184,0.18);
+            box-shadow: 0 32px 90px rgba(15,23,42,0.12);
+            padding: 32px;
         }
-        .card h2 {
-            margin: 0 0 10px;
-            font-size: 2.15rem;
-            letter-spacing: -0.03em;
-            color: #1e293b;
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        .card p.subtitle {
-            margin: 0 0 28px;
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(59,130,246,0.12);
+            color: #1d4ed8;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .title {
+            text-align: right;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: -0.04em;
+            color: #0f172a;
+        }
+        .subtitle {
+            margin: 8px 0 0;
             color: #475569;
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 0.96rem;
+            line-height: 1.6;
+        }
+        .screen {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+            border: 1px solid rgba(148,163,184,0.24);
+            border-radius: 26px;
+            padding: 24px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+        }
+        .screen-row {
+            display: grid;
+            gap: 8px;
+        }
+        .screen-row label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #334155;
+        }
+        .screen-row input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 18px;
+            padding: 16px 18px;
+            font-size: 1.05rem;
+            color: #0f172a;
+            background: #ffffff;
+            box-shadow: inset 0 2px 6px rgba(15,23,42,0.06);
+        }
+        .screen-row input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 8px rgba(37,99,235,0.12);
+        }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            border: none;
+            border-radius: 18px;
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+            transition: transform 0.18s ease, background 0.18s ease;
+        }
+        .key:hover {
+            background: #e0f2fe;
+        }
+        .key:active {
+            transform: translateY(1px);
+        }
+        .key.clear {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .key.zero {
+            grid-column: span 2;
         }
         .field {
             margin-bottom: 20px;
-            text-align: left;
         }
         .field label {
             display: block;
@@ -45,27 +133,10 @@
             font-weight: 700;
             color: #334155;
         }
-        .field input {
-            width: 100%;
-            border: 1px solid #cbd5e1;
-            border-radius: 16px;
-            padding: 16px 18px;
-            font-size: 1rem;
-            color: #0f172a;
-            background: #f8fafc;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-        }
-        .field input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.12);
-            transform: translateY(-1px);
-        }
         .options {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 12px;
-            margin-top: 8px;
         }
         .options label {
             position: relative;
@@ -95,22 +166,22 @@
             position: absolute;
             inset: 0;
             border-radius: 18px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(37, 99, 235, 0.12));
+            background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(37,99,235,0.12));
             z-index: -1;
-            border: 1px solid rgba(37, 99, 235, 0.25);
+            border: 1px solid rgba(37,99,235,0.25);
         }
         .options label:hover {
             border-color: #6366f1;
             background: #eef2ff;
         }
         .button-row {
-            margin-top: 22px;
+            margin-top: 12px;
         }
         .button-row button {
             width: 100%;
             border: none;
             border-radius: 18px;
-            padding: 16px 0;
+            padding: 18px 0;
             font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
@@ -120,7 +191,7 @@
         }
         .button-row button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.22);
+            box-shadow: 0 16px 30px rgba(37,99,235,0.22);
         }
         .hint {
             margin-top: 18px;
@@ -131,30 +202,51 @@
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Rectangle Calculator</h2>
-        <p class="subtitle">Enter length and breadth, then choose area, perimeter, or both and calculate instantly.</p>
-        <form method="POST" action="/calculate">
-            <div class="field">
-                <label for="length">Length</label>
-                <input id="length" name="length" type="number" step="any" min="0" required>
+    <div class="calculator">
+        <div class="topbar">
+            <span class="badge">Port 5001</span>
+            <div class="title">
+                <h1>Rectangle Calculator</h1>
+                <p class="subtitle">Use the keypad and input fields to build your values like a calculator.</p>
             </div>
-            <div class="field">
-                <label for="breadth">Breadth</label>
-                <input id="breadth" name="breadth" type="number" step="any" min="0" required>
+        </div>
+        <form method="POST" action="/calculate">
+            <div class="screen">
+                <div class="screen-row">
+                    <label for="length">Length</label>
+                    <input id="length" name="length" type="text" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" required data-calc-input>
+                </div>
+                <div class="screen-row">
+                    <label for="breadth">Breadth</label>
+                    <input id="breadth" name="breadth" type="text" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" required data-calc-input>
+                </div>
+            </div>
+            <div class="keypad" role="group" aria-label="Calculator keypad">
+                <button type="button" class="key" data-value="7">7</button>
+                <button type="button" class="key" data-value="8">8</button>
+                <button type="button" class="key" data-value="9">9</button>
+                <button type="button" class="key" data-value="4">4</button>
+                <button type="button" class="key" data-value="5">5</button>
+                <button type="button" class="key" data-value="6">6</button>
+                <button type="button" class="key" data-value="1">1</button>
+                <button type="button" class="key" data-value="2">2</button>
+                <button type="button" class="key" data-value="3">3</button>
+                <button type="button" class="key clear" data-value="C">C</button>
+                <button type="button" class="key zero" data-value="0">0</button>
+                <button type="button" class="key" data-value=".">.</button>
             </div>
             <div class="field">
                 <label>Select calculation</label>
                 <div class="options">
-                    <label class="option-button">
+                    <label>
                         <input type="radio" name="operation" value="area" checked>
                         <span>Area</span>
                     </label>
-                    <label class="option-button">
+                    <label>
                         <input type="radio" name="operation" value="perimeter">
                         <span>Perimeter</span>
                     </label>
-                    <label class="option-button">
+                    <label>
                         <input type="radio" name="operation" value="both">
                         <span>Both</span>
                     </label>
@@ -164,7 +256,32 @@
                 <button type="submit">Calculate</button>
             </div>
         </form>
-        <p class="hint">Choose one of the options above, then click Calculate to see a styled result page with the full answer.</p>
+        <p class="hint">Click a number button to append digits to the focused input. Use C to clear the current field.</p>
     </div>
+    <script>
+        const inputFields = Array.from(document.querySelectorAll('[data-calc-input]'));
+        let activeInput = inputFields[0];
+
+        inputFields.forEach(input => {
+            input.addEventListener('focus', () => activeInput = input);
+            input.addEventListener('click', () => activeInput = input);
+        });
+
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('click', () => {
+                const value = key.dataset.value;
+                if (!activeInput) return;
+                if (value === 'C') {
+                    activeInput.value = '';
+                    return;
+                }
+                if (value === '.' && activeInput.value.includes('.')) {
+                    return;
+                }
+                activeInput.value += value;
+            });
+        });
+    </script>
 </body>
 </html>
