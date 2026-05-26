@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -282,6 +282,305 @@
                     return;
                 }
                 activeInput.value += value;
+            });
+        });
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at top left, #e0f2fe 0%, #f8fafc 45%, #e2e8f0 100%);
+            font-family: Inter, system-ui, sans-serif;
+            color: #0f172a;
+        }
+        .calculator {
+            width: min(540px, 96vw);
+            background: rgba(255,255,255,0.98);
+            border-radius: 36px;
+            border: 1px solid rgba(148,163,184,0.18);
+            box-shadow: 0 32px 90px rgba(15,23,42,0.12);
+            padding: 32px;
+            box-sizing: border-box;
+        }
+        .topbar {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .title {
+            text-align: left;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: -0.04em;
+            color: #0f172a;
+        }
+        .subtitle {
+            margin: 8px 0 0;
+            color: #475569;
+            font-size: 0.96rem;
+            line-height: 1.6;
+        }
+        .screen {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 100%);
+            border: 1px solid rgba(148,163,184,0.24);
+            border-radius: 26px;
+            padding: 24px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+        }
+        .screen-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .screen-row label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #334155;
+            margin-left: 4px;
+        }
+        .screen-row input {
+            box-sizing: border-box;
+            width: 100%;
+            border: 2px solid #cbd5e1;
+            border-radius: 16px;
+            padding: 14px 18px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #0f172a;
+            background: #ffffff;
+            box-shadow: inset 0 2px 6px rgba(15,23,42,0.04);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .screen-row input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+        }
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            border: none;
+            border-radius: 16px;
+            background: #f1f5f9;
+            color: #0f172a;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(15,23,42,0.05);
+            transition: transform 0.1s ease, background 0.15s ease;
+        }
+        .key:hover {
+            background: #e2e8f0;
+        }
+        .key:active {
+            transform: translateY(2px);
+        }
+        .key.clear {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+        .key.clear:hover {
+            background: #fca5a5;
+        }
+        .key.zero {
+            grid-column: span 2;
+        }
+        .field {
+            margin-bottom: 20px;
+        }
+        .field > label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .options label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 16px;
+            background: #ffffff;
+            cursor: pointer;
+            font-weight: 700;
+            color: #475569;
+            transition: all 0.2s ease;
+        }
+        .options input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .options input:checked + span {
+            color: #1d4ed8;
+        }
+        .options input:checked + span::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 16px;
+            background: rgba(37,99,235,0.08);
+            z-index: -1;
+            border: 2px solid #2563eb;
+        }
+        .options label:hover {
+            background: #f8fafc;
+        }
+        .button-row {
+            margin-top: 24px;
+        }
+        .button-row button {
+            width: 100%;
+            border: none;
+            border-radius: 16px;
+            padding: 18px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .button-row button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(37,99,235,0.25);
+        }
+        .hint {
+            margin-top: 18px;
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="topbar">
+            <div class="title">
+                <h1>Rectangle Calculator</h1>
+                <p class="subtitle">Use the keypad or your keyboard to enter dimensions.</p>
+            </div>
+        </div>
+        <form method="POST" action="/calculate">
+            <div class="screen">
+                <div class="screen-row">
+                    <label for="length">Length</label>
+                    <input id="length" name="length" type="text" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" placeholder="0.00" required data-calc-input>
+                </div>
+                <div class="screen-row">
+                    <label for="breadth">Breadth</label>
+                    <input id="breadth" name="breadth" type="text" inputmode="decimal" pattern="[0-9.]*" autocomplete="off" placeholder="0.00" required data-calc-input>
+                </div>
+            </div>
+            
+            <div class="keypad" role="group" aria-label="Calculator keypad">
+                <button type="button" class="key" data-value="7">7</button>
+                <button type="button" class="key" data-value="8">8</button>
+                <button type="button" class="key" data-value="9">9</button>
+                <button type="button" class="key" data-value="4">4</button>
+                <button type="button" class="key" data-value="5">5</button>
+                <button type="button" class="key" data-value="6">6</button>
+                <button type="button" class="key" data-value="1">1</button>
+                <button type="button" class="key" data-value="2">2</button>
+                <button type="button" class="key" data-value="3">3</button>
+                <button type="button" class="key clear" data-value="C">C</button>
+                <button type="button" class="key zero" data-value="0">0</button>
+                <button type="button" class="key" data-value=".">.</button>
+            </div>
+
+            <div class="field">
+                <label>Select calculation</label>
+                <div class="options">
+                    <label>
+                        <input type="radio" name="operation" value="area" checked>
+                        <span>Area</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation" value="perimeter">
+                        <span>Perimeter</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="operation" value="both">
+                        <span>Both</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <button type="submit">Calculate Now</button>
+            </div>
+        </form>
+        <p class="hint">Tap an input field first, then click numbers to build your values.</p>
+    </div>
+
+    <script>
+        const inputFields = Array.from(document.querySelectorAll('[data-calc-input]'));
+        let activeInput = inputFields[0];
+        
+        // Auto-focus first input on load
+        activeInput.focus();
+
+        inputFields.forEach(input => {
+            input.addEventListener('focus', () => activeInput = input);
+            input.addEventListener('click', () => activeInput = input);
+        });
+
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('click', () => {
+                const value = key.dataset.value;
+                if (!activeInput) return;
+                
+                if (value === 'C') {
+                    activeInput.value = '';
+                    activeInput.focus();
+                    return;
+                }
+                
+                if (value === '.' && activeInput.value.includes('.')) {
+                    return;
+                }
+                
+                activeInput.value += value;
+                activeInput.focus();
             });
         });
     </script>
